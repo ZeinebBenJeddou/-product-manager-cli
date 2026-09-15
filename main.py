@@ -86,6 +86,7 @@ def main():
             case 2:
                 display_products(products)
             case 3:
+                name = input("Nom à chercher : ")
                 produit = search_product(products, name)
 
                 if produit != None:
