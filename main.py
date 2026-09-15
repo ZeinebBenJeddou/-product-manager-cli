@@ -11,8 +11,17 @@ def add_product(products):
 }
     products.append(dictionnaire)
 
+def display_products(products):
+    nb=0
+    for product in products:
+        print(nb+1,".", product["name"],"-", product["price"],"DT - Stock",product["stock"])
+        nb=nb+1
+        
 
-products = []
-add_product(products)
-add_product(products)
-print(products)
+
+
+products = [
+    {"name": "p1", "price": 520.2, "stock": 5},
+    {"name": "p2", "price": 556, "stock": 4}
+]
+display_products(products)
