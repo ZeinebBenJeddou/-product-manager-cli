@@ -61,11 +61,72 @@ def calculate_inventory_value(products):
         val= val+(p["price"]*p["stock"])
     return val
 
-products = [
-]
+def main():
+    products = []
+    choix = 0
 
-add_product(products)
+    while choix != 7:
+        print("\n===== PRODUCT MANAGER CLI =====")
+        print("1. Ajouter un produit")
+        print("2. Afficher les produits")
+        print("3. Rechercher un produit")
+        print("4. Modifier le stock")
+        print("5. Supprimer un produit")
+        print("6. Calculer la valeur du stock")
+        print("7. Quitter")
 
-display_products(products)
+        choix = int(input("Votre choix : "))
 
-print(calculate_inventory_value(products))
+        match choix:
+            case 1:
+                if add_product(products)==True:
+                    print("Produit ajouté avec succès !")
+                else:
+                    print("Produit non ajouté")
+            case 2:
+                display_products(products)
+            case 3:
+                produit = search_product(products, name)
+
+                if produit != None:
+                    print("Produit recherché :")
+                    print(produit)
+                else:
+                    print("Produit introuvable")
+            case 4:
+                    name = input("Nom à chercher : ")
+
+                    try:
+                        stock = int(input("Stock : "))
+                    except ValueError:
+                        print("Stock invalide")
+                        continue
+
+                    if stock < 0:
+                        print("Le stock ne peut pas être négatif.")
+                        continue
+
+                    resultat = update_stock(products, name, stock)
+
+                    if resultat:
+                        print("Produit modifié")
+                    else:
+                        print("Produit introuvable")
+            case 5:
+                name = input("Nom à supprimer : ")
+                
+                resultat = delete_product(products, name)
+                
+                if resultat:
+                    print("Produit supprimé")
+                else:
+                    print("Produit introuvable")
+            case 6:
+                print("La valeur du stock est ", calculate_inventory_value(products))
+            case 7:
+                print("Au revoir !")
+                break
+            case _:
+                print("Choix invalide")
+
+main()
